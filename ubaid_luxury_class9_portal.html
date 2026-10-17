@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#08090b">
+<meta name="description" content="A refined Class 9 Punjab Board learning library by Ubaid.">
+<title>UBAID — Class 9 Learning Atelier</title>
+<style>
+:root{color-scheme:dark;--bg:#08090b;--surface:#101216;--surface2:#15181d;--line:#272b32;--ink:#f4f4f5;--muted:#9da3ad;--red:#e32636;--red2:#ff5967;--gold:#c9a96b;--radius:20px}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.55 Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;overflow-x:hidden}
+a{color:inherit}
+button,input,select{font:inherit}
+button{cursor:pointer}
+#ambient{position:fixed;inset:0;width:100%;height:100%;z-index:-2;pointer-events:none;opacity:.62}
+.aurora{position:fixed;inset:-20%;z-index:-3;pointer-events:none;background:radial-gradient(ellipse at 18% 12%,#42121b55,transparent 36%),radial-gradient(ellipse at 82% 40%,#182d4250,transparent 40%);filter:blur(25px)}
+header{position:sticky;top:0;z-index:20;border-bottom:1px solid #ffffff12;background:#08090bd9;backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
+.nav{max-width:1180px;margin:auto;padding:15px 22px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.logo{font-size:1rem;font-weight:900;letter-spacing:.2em;text-decoration:none}.logo em{font-style:normal;color:var(--red2)}
+.navright{display:flex;align-items:center;gap:10px}
+.navlink{color:#b8bdc6;text-decoration:none;font-size:.88rem;padding:8px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:1px solid #343941;border-radius:12px;background:#171a20;color:#f8f8f8;padding:10px 15px;font-weight:650;transition:transform .2s,border-color .2s,background .2s;text-decoration:none}
+.btn:hover{transform:translateY(-2px);border-color:#656b76}.btn.red{background:var(--red);border-color:var(--red);color:white}.btn.ghost{background:transparent}.btn.small{padding:7px 10px;font-size:.82rem}
+main{max-width:1180px;margin:auto;padding:0 22px 84px}
+.hero{min-height:500px;display:grid;grid-template-columns:1.25fr .75fr;align-items:center;gap:36px;padding:76px 0 60px}
+.kicker{display:flex;align-items:center;gap:10px;color:#f18b94;text-transform:uppercase;font-size:.72rem;font-weight:800;letter-spacing:.2em}
+.kicker:before{content:"";width:24px;height:1px;background:var(--red)}
+h1{font-size:clamp(3rem,8.2vw,7.2rem);line-height:.91;letter-spacing:-.075em;margin:22px 0 24px;font-weight:800}
+h1 .accent{color:var(--red2)}
+.hero p{max-width:550px;color:#aeb3bc;font-size:1.05rem;margin:0 0 28px}
+.heroactions{display:flex;flex-wrap:wrap;gap:10px}
+.hero-note{justify-self:end;width:min(100%,330px);border:1px solid #ffffff17;border-radius:26px;padding:24px;background:linear-gradient(145deg,#ffffff0b,#ffffff03);box-shadow:0 24px 80px #0005;position:relative;overflow:hidden}
+.hero-note:before{content:"";position:absolute;width:170px;height:170px;border:1px solid #e3263633;border-radius:50%;right:-75px;top:-70px;box-shadow:0 0 0 22px #e3263610,0 0 0 48px #e3263608}
+.note-top{font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+.note-number{font-size:4.2rem;font-weight:800;letter-spacing:-.08em;margin:8px 0 0}
+.note-number span{color:var(--red2)}
+.note-caption{color:#a7abb3;font-size:.9rem}
+.note-line{height:1px;background:#ffffff16;margin:20px 0}
+.note-foot{display:flex;justify-content:space-between;color:#d8d9dc;font-size:.82rem}
+.section{padding:24px 0 14px}
+.sectionhead{display:flex;align-items:end;justify-content:space-between;gap:15px;margin:0 0 20px}
+.sectionhead h2{margin:0;font-size:clamp(1.4rem,3vw,2rem);letter-spacing:-.04em}
+.sectionhead p{margin:5px 0 0;color:var(--muted);font-size:.9rem}
+.sectionhead .count{color:var(--muted);font-size:.8rem;white-space:nowrap}
+.subjectgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.subject{position:relative;text-align:left;min-height:142px;padding:20px;border:1px solid var(--line);border-radius:17px;background:linear-gradient(145deg,#15171bdf,#0d0f12e8);color:var(--ink);overflow:hidden;transition:transform .22s,border-color .22s,background .22s}
+.subject:hover{transform:translateY(-4px);border-color:#565b65}
+.subject.active{border-color:#e32636;background:linear-gradient(145deg,#281116,#121014);box-shadow:0 0 0 1px #e3263625}
+.subject .num{color:#747a84;font-size:.7rem;letter-spacing:.12em}
+.subject h3{font-size:1.06rem;margin:10px 0 4px}
+.subject p{margin:0;color:#9da3ad;font-size:.78rem}
+.subject .arrow{position:absolute;right:18px;top:17px;color:#686e78;font-size:1.1rem}
+.library{margin-top:48px}
+.tools{display:flex;gap:10px;flex-wrap:wrap;margin:20px 0}
+.searchbox{flex:1;min-width:220px;position:relative}
+.searchbox input{width:100%;padding:13px 15px 13px 42px}
+.searchbox:before{content:"⌕";position:absolute;left:15px;top:7px;color:#8d939d;font-size:1.5rem}
+.fieldinput{background:#101216;border:1px solid #30343c;border-radius:12px;color:var(--ink);padding:12px 13px;outline:none}
+.fieldinput:focus{border-color:#9b4b54;box-shadow:0 0 0 3px #e3263618}
+.tools select{min-width:155px}
+.resourcegrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px}
+.resource{display:flex;flex-direction:column;gap:11px;padding:20px;border:1px solid var(--line);border-radius:17px;background:linear-gradient(150deg,#14161a,#0d0f12);min-height:220px;animation:rise .4s both}
+.resource .tag{color:#ff8d97;text-transform:uppercase;letter-spacing:.13em;font-size:.68rem;font-weight:800}
+.resource h3{font-size:1.08rem;line-height:1.3;margin:0}
+.resource p{color:#a1a6af;font-size:.84rem;margin:0}
+.resource .resourcefoot{margin-top:auto;padding-top:8px;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.resource .subjectname{color:#858b95;font-size:.75rem}
+.empty{grid-column:1/-1;padding:35px 20px;text-align:center;border:1px dashed #343840;border-radius:16px;color:var(--muted)}
+.admin{margin-top:55px;border:1px solid #343840;border-radius:22px;background:#101216eF;padding:25px;box-shadow:0 30px 80px #0004}
+.adminhead{display:flex;justify-content:space-between;align-items:start;gap:16px}
+.admin h2{margin:0;font-size:1.5rem}.admin .sub{color:var(--muted);margin:5px 0 20px}
+.formgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}
+.field{display:flex;flex-direction:column;gap:7px}.field label{color:#b9bec7;font-size:.8rem}.field input,.field select{width:100%}.field.full{grid-column:1/-1}
+.adminbuttons{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+.status{min-height:24px;color:#ff9aa2;font-size:.85rem;margin-top:10px}
+.hidden{display:none!important}
+.adminhint{color:#8f959f;font-size:.78rem;margin-top:15px}
+footer{border-top:1px solid #ffffff12;color:#858b95;text-align:center;padding:25px 20px;font-size:.8rem}
+footer strong{color:#e7e7e8}
+@keyframes rise{from{opacity:0;transform:translateY(9px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:850px){.hero{grid-template-columns:1fr;min-height:unset;padding:65px 0 48px}.hero-note{justify-self:start;width:100%;max-width:460px}.subjectgrid{grid-template-columns:repeat(2,minmax(0,1fr))}.resourcegrid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:560px){.nav{padding:12px 16px}.navlink{display:none}main{padding:0 16px 60px}.hero{padding:52px 0 42px;gap:26px}h1{font-size:clamp(3.2rem,16vw,5.2rem)}.subjectgrid,.resourcegrid{grid-template-columns:1fr}.subject{min-height:115px}.sectionhead{align-items:start;flex-direction:column}.tools select{flex:1}.admin{padding:17px}.formgrid{grid-template-columns:1fr}.field.full{grid-column:auto}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<div class="aurora" aria-hidden="true"></div><canvas id="ambient" aria-hidden="true"></canvas>
+<header><nav class="nav"><a class="logo" href="#">UBAID<em>.</em></a><div class="navright"><a class="navlink" href="#subjects">Subjects</a><a class="navlink" href="#library">Library</a><button class="btn small" id="adminToggle">Admin access ↗</button></div></nav></header>
+<main>
+<section class="hero">
+<div><div class="kicker">Punjab Board · Class 9</div><h1>Study with<br><span class="accent">intention.</span></h1><p>A refined study space for curious minds. Explore your subjects, find learning resources, and make every study session count.</p><div class="heroactions"><a class="btn red" href="#subjects">Explore subjects <span aria-hidden="true">↘</span></a><a class="btn ghost" href="#library">Browse library</a></div></div>
+<aside class="hero-note"><div class="note-top">Your learning space</div><div class="note-number">09<span>.</span></div><div class="note-caption">Core subjects, one focused destination.</div><div class="note-line"></div><div class="note-foot"><span>CLASS IX</span><span>MADE BY UBAID</span></div></aside>
+</section>
+<section class="section" id="subjects"><div class="sectionhead"><div><div class="kicker">Choose your direction</div><h2>Explore subjects</h2><p>Choose a subject to filter its resources.</p></div><span class="count">09 SUBJECTS</span></div><div class="subjectgrid" id="subjectGrid"></div></section>
+<section class="library section" id="library"><div class="sectionhead"><div><div class="kicker">The reading room</div><h2 id="libraryTitle">Learning library</h2><p>Textbooks, notes, and past papers in one place.</p></div><span class="count" id="resourceCount">Loading…</span></div>
+<div class="tools"><div class="searchbox"><input class="fieldinput" id="search" placeholder="Search resources…" aria-label="Search resources"></div><select class="fieldinput" id="typeFilter" aria-label="Filter resource type"><option value="">All types</option><option>Textbook</option><option>Notes</option><option>Past Paper</option></select><button class="btn small ghost" id="clearFilter">Clear filters</button></div><div class="resourcegrid" id="resourceGrid"><div class="empty">Connecting to the library…</div></div></section>
+<section class="admin hidden" id="admin"><div class="adminhead"><div><div class="kicker">Private workspace</div><h2>Admin studio</h2><p class="sub">Manage the public learning library.</p></div><button class="btn small ghost" id="closeAdmin">Close</button></div>
+<div id="loginArea"><div class="formgrid"><div class="field"><label for="email">Admin email</label><input class="fieldinput" id="email" type="email" autocomplete="username" placeholder="Your Firebase admin email"></div><div class="field"><label for="password">Password</label><input class="fieldinput" id="password" type="password" autocomplete="current-password" placeholder="Password"></div></div><div class="adminbuttons"><button class="btn red" id="loginBtn">Sign in</button></div></div>
+<div id="uploadArea" class="hidden"><div class="formgrid"><div class="field"><label for="title">Resource title</label><input class="fieldinput" id="title" placeholder="e.g. Mathematics — Chapter 1"></div><div class="field"><label for="subject">Subject</label><select class="fieldinput" id="subject"></select></div><div class="field"><label for="type">Resource type</label><select class="fieldinput" id="type"><option>Textbook</option><option>Notes</option><option>Past Paper</option></select></div><div class="field"><label for="file">PDF file (up to 50 MB)</label><input class="fieldinput" id="file" type="file" accept=".pdf,application/pdf"></div><div class="field full"><label for="description">Description (optional)</label><input class="fieldinput" id="description" placeholder="Chapter, year, edition, or useful details"></div></div><div class="adminbuttons"><button class="btn red" id="uploadBtn">Upload & publish PDF</button><button class="btn" id="logoutBtn">Sign out</button></div><p class="adminhint">Files are uploaded to Firebase Storage. Published resource details are stored in Firestore and shown to all visitors.</p></div><div class="status" id="status" role="status"></div></section>
+</main><footer>Designed with focus · <strong>UBAID</strong> © <span id="year"></span> · Class 9 Learning Atelier</footer>
+<script type="module">
+/* FIREBASE SETUP:
+   - Create Firebase project + Web app; paste config below.
+   - Enable Authentication > Email/Password and create your admin account.
+   - Create Firestore and Storage.
+   - Configure the rules shown in the README/setup instructions supplied with this file.
+   - Host this file on GitHub Pages. Never put an admin password in this file.
+*/
+import{initializeApp}from"https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import{getAuth,signInWithEmailAndPassword,signOut,onAuthStateChanged}from"https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import{getFirestore,collection,addDoc,deleteDoc,doc,onSnapshot,query,orderBy,serverTimestamp}from"https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import{getStorage,ref,uploadBytes,getDownloadURL,deleteObject}from"https://www.gstatic.com/firebasejs/10.12.2/firebase-storage.js";
+const firebaseConfig={apiKey:"PASTE_API_KEY",authDomain:"PASTE_PROJECT_ID.firebaseapp.com",projectId:"PASTE_PROJECT_ID",storageBucket:"PASTE_PROJECT_ID.appspot.com",messagingSenderId:"PASTE_MESSAGING_SENDER_ID",appId:"PASTE_APP_ID"};
+const app=initializeApp(firebaseConfig),auth=getAuth(app),db=getFirestore(app),storage=getStorage(app);
+const subjects=["Mathematics","English","Chemistry","Urdu","Computer Science","Physics","Tarjuma-tul-Quran (T.Q.)","Islamiat","Biology"];
+const $=s=>document.querySelector(s),esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+let chosen="",items=[],user=null;
+$("#year").textContent=new Date().getFullYear();
+subjects.forEach(s=>{let o=document.createElement("option");o.value=s;o.textContent=s;$("#subject").append(o)});
+function renderSubjects(){$("#subjectGrid").innerHTML="";subjects.forEach((s,i)=>{let b=document.createElement("button");b.className="subject"+(chosen===s?" active":"");b.innerHTML=`<span class="num">SUBJECT 0${i+1}</span><span class="arrow">↗</span><h3>${esc(s)}</h3><p>Textbooks · Notes · Past papers</p>`;b.onclick=()=>{chosen=chosen===s?"":s;renderSubjects();renderItems();$("#libraryTitle").textContent=chosen||"Learning library";$("#library").scrollIntoView({behavior:"smooth",block:"start"})};$("#subjectGrid").append(b)})}
+function renderItems(){let q=$("#search").value.trim().toLowerCase(),t=$("#typeFilter").value;let filtered=items.filter(r=>(!chosen||r.subject===chosen)&&(!t||r.type===t)&&(!q||`${r.title} ${r.subject} ${r.type} ${r.description||""}`.toLowerCase().includes(q)));$("#resourceCount").textContent=`${filtered.length} RESOURCE${filtered.length===1?"":"S"}`;$("#resourceGrid").innerHTML="";if(!filtered.length){$("#resourceGrid").innerHTML='<div class="empty">No resources here yet. Try another subject or search.</div>';return}filtered.forEach(r=>{let el=document.createElement("article");el.className="resource";el.innerHTML=`<div class="tag">${esc(r.type)} · ${esc(r.subject)}</div><h3>${esc(r.title)}</h3><p>${esc(r.description||"Class 9 learning resource")}</p><div class="resourcefoot"><span class="subjectname">PDF DOCUMENT</span><a class="btn red small" href="${esc(r.url)}" target="_blank" rel="noopener">Open PDF ↗</a></div>`;if(user){let del=document.createElement("button");del.className="btn small";del.textContent="Remove";del.onclick=async()=>{if(!confirm("Remove this resource from the public library?"))return;try{await deleteDoc(doc(db,"resources",r.id));if(r.storagePath)await deleteObject(ref(storage,r.storagePath));setStatus("Resource removed.")}catch(e){setStatus("Remove failed: "+e.message)}};el.querySelector(".resourcefoot").append(del)}$("#resourceGrid").append(el)})}
+$("#search").addEventListener("input",renderItems);$("#typeFilter").addEventListener("change",renderItems);$("#clearFilter").onclick=()=>{$("#search").value="";$("#typeFilter").value="";chosen="";$("#libraryTitle").textContent="Learning library";renderSubjects();renderItems()};
+function setStatus(s){$("#status").textContent=s}
+$("#adminToggle").onclick=()=>{$("#admin").classList.toggle("hidden");$("#admin").scrollIntoView({behavior:"smooth",block:"start"})};$("#closeAdmin").onclick=()=>$("#admin").classList.add("hidden");
+$("#loginBtn").onclick=async()=>{try{await signInWithEmailAndPassword(auth,$("#email").value.trim(),$("#password").value);setStatus("Signed in.")}catch(e){setStatus("Sign in failed: "+e.message)}};
+$("#logoutBtn").onclick=()=>signOut(auth).catch(e=>setStatus(e.message));
+onAuthStateChanged(auth,u=>{user=u;$("#loginArea").classList.toggle("hidden",!!u);$("#uploadArea").classList.toggle("hidden",!u);setStatus(u?`Signed in as ${u.email}.`:"");renderItems()});
+$("#uploadBtn").onclick=async()=>{let title=$("#title").value.trim(),subject=$("#subject").value,type=$("#type").value,file=$("#file").files[0],description=$("#description").value.trim();if(!user){setStatus("Please sign in first.");return}if(!title||!file){setStatus("Enter a title and choose a PDF.");return}if(file.type!=="application/pdf"&&!file.name.toLowerCase().endsWith(".pdf")){setStatus("Choose a PDF file.");return}if(file.size>50*1024*1024){setStatus("PDF must be smaller than 50 MB.");return}let path=`pdfs/${Date.now()}_${file.name.replace(/[^a-zA-Z0-9._-]/g,"_")}`,fileRef=ref(storage,path),btn=$("#uploadBtn");btn.disabled=true;btn.textContent="Uploading…";try{await uploadBytes(fileRef,file,{contentType:"application/pdf"});let url=await getDownloadURL(fileRef);await addDoc(collection(db,"resources"),{title,subject,type,description,url,storagePath:path,createdAt:serverTimestamp(),createdBy:user.uid});$("#title").value="";$("#description").value="";$("#file").value="";setStatus("Published. This PDF is now visible to all visitors.")}catch(e){setStatus("Upload failed: "+e.message)}finally{btn.disabled=false;btn.textContent="Upload & publish PDF"}};
+onSnapshot(query(collection(db,"resources"),orderBy("createdAt","desc")),snap=>{items=snap.docs.map(d=>({id:d.id,...d.data()}));renderItems()},err=>{items=[];renderItems();setStatus("Library connection error: "+err.message)});
+renderSubjects();renderItems();
+
+/* Lightweight drifting particle field; capped for mobile and disabled for reduced motion. */
+const canvas=$("#ambient"),ctx=canvas.getContext("2d"),reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
+let W=0,H=0,dots=[];
+function resize(){W=canvas.width=Math.floor(innerWidth*devicePixelRatio);H=canvas.height=Math.floor(innerHeight*devicePixelRatio);canvas.style.width=innerWidth+"px";canvas.style.height=innerHeight+"px";let n=Math.min(75,Math.floor(innerWidth/17));dots=Array.from({length:n},()=>({x:Math.random()*W,y:Math.random()*H,r:(.5+Math.random()*1.35)*devicePixelRatio,vx:(Math.random()-.5)*.13*devicePixelRatio,vy:(.08+Math.random()*.24)*devicePixelRatio,a:.12+Math.random()*.35}))}
+function frame(){ctx.clearRect(0,0,W,H);for(let d of dots){d.x+=d.vx;d.y-=d.vy;if(d.x<0)d.x=W;if(d.x>W)d.x=0;if(d.y<0)d.y=H;if(d.y>H)d.y=0;ctx.beginPath();ctx.arc(d.x,d.y,d.r,0,Math.PI*2);ctx.fillStyle=`rgba(222,228,239,${d.a})`;ctx.fill()}if(!reduce)requestAnimationFrame(frame)}
+addEventListener("resize",resize,{passive:true});resize();frame();
+</script>
+</body></html>
